@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Apple : MonoBehaviour
 {
-
+    private Animator anim;
+    private string hitName = "IsHit";
 
     // Start is called before the first frame update
     void Start()
@@ -18,29 +19,17 @@ public class Coin : MonoBehaviour
         
     }
 
-    /* 
-    // Old Code that detects collision rather than trigger
-    void OnCollisionEnter2D(Collision2D collision)
+    void Awake()
     {
-        Debug.Log("Coin - CollisionEnter");
-        if (collision.gameObject.tag == "Player")
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Debug.Log("Nothing happened");
-        }
+        anim = GetComponent<Animator>();
     }
-    */
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         //Destroy the coin if Object tagged Player comes in contact with it
         if (collision.CompareTag("Player"))
         {
-            GameManager.totalCoins++;
-            Destroy(gameObject);
+            anim.SetBool(hitName, true);
         }
     }
 }

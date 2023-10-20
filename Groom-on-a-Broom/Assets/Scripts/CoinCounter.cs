@@ -6,12 +6,12 @@ using TMPro;
 
 public class CoinCounter : MonoBehaviour
 {
-    private TextMeshProUGUI counterText;
+    public TextMeshProUGUI counterText;
 
     // Start is called before the first frame update
     void Start()
     {
-        counterText = gameObject.GetComponent<TextMeshProUGUI>();
+        
     }
 
     // Update is called once per frame
@@ -23,9 +23,9 @@ public class CoinCounter : MonoBehaviour
             return;
         }
 
-        if(counterText.text != Coin.totalCoins.ToString())
+        if(counterText.text != GameManager.totalCoins.ToString())
         {
-            counterText.text = Coin.totalCoins.ToString();
+            counterText.text = GameManager.totalCoins.ToString();
         }
     }
 }
