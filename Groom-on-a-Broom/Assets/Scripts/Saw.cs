@@ -7,7 +7,7 @@ public class Saw : MonoBehaviour
     public float changeIncrement;
 
     private float ySpeed;
-    private bool hitWall;
+    private float startingX;
     private Direction dir;
 
     public enum Direction
@@ -19,9 +19,9 @@ public class Saw : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hitWall = false;
         dir = Direction.UP;
         ySpeed = 0.1f;
+        startingX = transform.position.x;
     }
     void Awake()
     {
@@ -40,7 +40,7 @@ public class Saw : MonoBehaviour
             ySpeed -= changeIncrement;
         }
 
-        transform.position = new Vector3(transform.position.x, ySpeed, 0);
+        transform.position = new Vector3(startingX, ySpeed, 0);
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
