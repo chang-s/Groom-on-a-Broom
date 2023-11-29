@@ -7,12 +7,17 @@ public class Player : MonoBehaviour
     public float xSpeed;
     public float ySpeed;
 
-    private Rigidbody2D rigidBody; 
+    private Rigidbody2D rigidBody;
+    private Animator anim;
+    private string jumpVar = "IsJumping";
+    private string hitVar = "IsHit";
+    private string groundVar = "OnGround";
 
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = gameObject.GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -30,16 +35,39 @@ public class Player : MonoBehaviour
             return;
         }
 
-        // Check if the specified key is being held down
-        if (Input.GetKey(KeyCode.W))
+        rigidBody.velocity = new Vector3(xSpeed, rigidBody.velocity.y + verticalVelocity, 0);
+
+        if (rigidBody.velocity.y + verticalVelocity > 0)
         {
-            Debug.Log("Holding W");
+            anim.SetBool(jumpVar, true);
+        } else
+        {
+            anim.SetBool(jumpVar, false);
         }
-        if (Input.GetKey(KeyCode.S))
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Holding S");
+            anim.SetBool(hitVar, true);
         }
 
-        rigidBody.velocity = new Vector3(xSpeed, rigidBody.velocity.y + verticalVelocity, 0);
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            anim.SetBool(groundVar, true);
+        }
+    }
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            anim.SetBool(hitVar, false);
+        }
+
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            anim.SetBool(groundVar, false);
+        }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Apple : MonoBehaviour
 {
     private Animator anim;
-    private string hitName = "IsHit";
+    private string hitVar = "IsHit";
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +29,9 @@ public class Apple : MonoBehaviour
         //Destroy the coin if Object tagged Player comes in contact with it
         if (collision.CompareTag("Player"))
         {
-            anim.SetBool(hitName, true);
+            anim.SetBool(hitVar, true);
+            GameManager.totalLife++;
+            Destroy(gameObject);
         }
     }
 }
