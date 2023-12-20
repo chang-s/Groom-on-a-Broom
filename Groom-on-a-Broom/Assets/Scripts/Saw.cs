@@ -6,7 +6,7 @@ public class Saw : MonoBehaviour
 {
     public float changeIncrement;
 
-    private float ySpeed;
+    private float yPos;
     private float startingX;
     private Direction dir;
 
@@ -20,7 +20,7 @@ public class Saw : MonoBehaviour
     void Start()
     {
         dir = Direction.UP;
-        ySpeed = 0.1f;
+        yPos = 0.1f;
         startingX = transform.position.x;
     }
     void Awake()
@@ -34,13 +34,13 @@ public class Saw : MonoBehaviour
     {
         if (dir == Direction.UP)
         {
-            ySpeed += changeIncrement;
+            yPos += changeIncrement;
         } else
         {
-            ySpeed -= changeIncrement;
+            yPos -= changeIncrement;
         }
 
-        transform.position = new Vector3(startingX, ySpeed, 0);
+        transform.position = new Vector3(startingX, yPos + changeIncrement, 0);
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
