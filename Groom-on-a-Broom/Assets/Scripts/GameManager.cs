@@ -8,18 +8,7 @@ public class GameManager : MonoBehaviour
     // Keep track of total picked coins
     public static int totalCoins = 0;
     public static int totalLife = 5;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public static int totalDistance = 0;
 
     public int getCoins()
     {
@@ -28,5 +17,9 @@ public class GameManager : MonoBehaviour
     public int getLife()
     {
         return totalLife;
+    }
+    public int getDistance()
+    {
+        return totalDistance;
     }
 }

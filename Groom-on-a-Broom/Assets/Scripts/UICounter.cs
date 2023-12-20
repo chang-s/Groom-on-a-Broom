@@ -13,28 +13,36 @@ public class UICounter : MonoBehaviour
     void Start()
     {
         coinCounter.text = GameManager.totalCoins.ToString();
-        heartCounter.text = GameManager.totalCoins.ToString();
+        heartCounter.text = GameManager.totalLife.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (coinCounter == null) {
-            Debug.Log("coinCounter obj is null.");
-            return;
-        } else if (heartCounter == null) {
-            Debug.Log("heartCounter obj is null.");
-            return;
-        }
-
-        if (coinCounter.text != GameManager.totalCoins.ToString())
+        if (!GameScreens.isPaused)
         {
-            coinCounter.text = GameManager.totalCoins.ToString();
-        }
+            GameManager.totalDistance++;
 
-        if (heartCounter.text != GameManager.totalLife.ToString())
-        {
-            heartCounter.text = GameManager.totalLife.ToString();
+            if (coinCounter == null)
+            {
+                Debug.Log("coinCounter obj is null.");
+                return;
+            }
+            else if (heartCounter == null)
+            {
+                Debug.Log("heartCounter obj is null.");
+                return;
+            }
+
+            if (coinCounter.text != GameManager.totalCoins.ToString())
+            {
+                coinCounter.text = GameManager.totalCoins.ToString();
+            }
+
+            if (heartCounter.text != GameManager.totalLife.ToString())
+            {
+                heartCounter.text = GameManager.totalLife.ToString();
+            }
         }
     }
 }

@@ -40,7 +40,10 @@ public class Saw : MonoBehaviour
             yPos -= changeIncrement;
         }
 
-        transform.position = new Vector3(startingX, yPos + changeIncrement, 0);
+        if (!GameScreens.isPaused)
+        {
+            transform.position = new Vector3(startingX, yPos + changeIncrement, 0);
+        }
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
