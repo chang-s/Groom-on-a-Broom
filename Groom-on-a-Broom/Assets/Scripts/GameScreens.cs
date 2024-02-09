@@ -17,7 +17,7 @@ public class GameScreens : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P)) {
+        if (Input.GetKey(KeyCode.Escape)) {
             if (isPaused)
             {
                 Resume();

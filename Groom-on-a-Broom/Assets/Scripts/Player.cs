@@ -7,17 +7,21 @@ public class Player : MonoBehaviour
     public float xSpeed;
     public float ySpeed;
 
-    private Rigidbody2D rigidBody;
-    private Animator anim;
     private string jumpVar = "IsJumping";
     private string hitVar = "IsHit";
     private string groundVar = "OnGround";
 
-    // Start is called before the first frame update
+    private Rigidbody2D rigidBody;
+    private Animator anim;
+
+    private Vector3 endPosition = new Vector3();
+    private Vector3 startPosition;
+
     void Start()
     {
         rigidBody = gameObject.GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        startPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -35,7 +39,10 @@ public class Player : MonoBehaviour
             return;
         }
 
-        rigidBody.velocity = new Vector3(xSpeed, rigidBody.velocity.y + verticalVelocity, 0);
+        rigidBody.velocity = new Vector3(xSpeed, Mathf.Min(rigidBody.velocity.y + verticalVelocity, 5), 0);
+
+        // Testing out Lerp
+        // transform.position = Vector3.Lerp(transform.position, endPosition, Time.deltaTime);
 
         if (rigidBody.velocity.y + verticalVelocity > 0)
         {
