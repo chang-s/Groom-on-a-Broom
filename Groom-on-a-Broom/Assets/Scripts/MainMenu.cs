@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public void OnPlayButton() {
         GameManager.totalLife = 1; // better way to reset total life?
+        GameScreens.gameHasEnded = false;
         Time.timeScale = 1f; // how to remove?
         SceneManager.LoadScene(1);
     }

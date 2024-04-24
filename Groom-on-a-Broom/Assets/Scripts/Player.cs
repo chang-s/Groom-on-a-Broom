@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
+    // Add acceleration instead of setting velocity directly. verticalVelocity = instead of having speed you set, have some amount of acceleration. Take current velocity and add acceleration. So input goes up and down would lower/raise acceleration, then applied to (acceleration +5/-5 if pressing up/down). Gives a more wavey feel. Give a maximum. 
     void Update()
     {
         // Code Update: 9-6-23
@@ -42,7 +43,7 @@ public class Player : MonoBehaviour
         rigidBody.velocity = new Vector3(xSpeed, Mathf.Min(rigidBody.velocity.y + verticalVelocity, 5), 0);
 
         // Testing out Lerp
-        // transform.position = Vector3.Lerp(transform.position, endPosition, Time.deltaTime);
+        //transform.position = Vector3.Lerp(transform.position, endPosition, Time.deltaTime);
 
         if (rigidBody.velocity.y + verticalVelocity > 0)
         {
