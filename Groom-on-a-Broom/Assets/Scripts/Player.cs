@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public float xSpeed;
     public float ySpeed;
+    public ParticleSystem dustEmit;
 
     private string jumpVar = "IsJumping";
     private string hitVar = "IsHit";
@@ -54,6 +55,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Fixed Update - collider/rigidbody on Player. you can raycast, shoot a line to the ground and see if it hits a ground (programatic solution). Easier solution: 2nd collider that sits at the feet of the player. Rectangle under his feet. See if that rectangle collider is hitting the ground.
+    // Have reference to FeetCollider, check if it's hitting the ground on Update.
+    // if it's marked as "isTrigger" won't interact with physics - won't stop other objects. Will fire off "ontriggerenter". Won't stop anything or interact with physics engine. 
+
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
@@ -64,6 +69,8 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             anim.SetBool(groundVar, true);
+            dustEmit.Stop();
+            dustEmit.Play();
         }
     }
     void OnCollisionExit2D(Collision2D other)
