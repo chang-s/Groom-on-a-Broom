@@ -8,12 +8,15 @@ public class GameScreens : MonoBehaviour
 {
     public GameObject pauseMenu;
     public GameObject gameOverUI;
+    public GameObject winScreenUI;
 
     public static bool isPaused = false;
     public static bool gameHasEnded = false;
 
     public TextMeshProUGUI distanceCounter;
     public TextMeshProUGUI coinCounter;
+    public TextMeshProUGUI distanceCounterWin;
+    public TextMeshProUGUI coinCounterWin;
 
 
     // Update is called once per frame
@@ -30,6 +33,9 @@ public class GameScreens : MonoBehaviour
         } else if (GameManager.totalLife < 1 && !gameHasEnded)
         {
             GameOver();
+        } else if (GameManager.cleared)
+        {
+            WinGame();
         }
     }
 
@@ -73,5 +79,17 @@ public class GameScreens : MonoBehaviour
         coinCounter.text = GameManager.totalCoins.ToString();
         gameOverUI.SetActive(true);
         Time.timeScale = 0f;
+        GameManager.totalLife = 5;
+    }
+
+    public void WinGame()
+    {
+        isPaused = true;
+        gameHasEnded = true;
+        distanceCounterWin.text = GameManager.totalDistance.ToString();
+        coinCounterWin.text = GameManager.totalCoins.ToString();
+        winScreenUI.SetActive(true);
+        Time.timeScale = 0f;
+        GameManager.totalLife = 5;
     }
 }

@@ -6,7 +6,10 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public void OnPlayButton() {
-        GameManager.totalLife = 1; // better way to reset total life?
+        GameManager.totalLife = 5; // better way to reset total life?
+        GameManager.totalCoins = 0;
+        GameManager.totalDistance = 0;
+        GameManager.cleared = false;
         GameScreens.gameHasEnded = false;
         Time.timeScale = 1f; // how to remove?
         SceneManager.LoadScene(1);
