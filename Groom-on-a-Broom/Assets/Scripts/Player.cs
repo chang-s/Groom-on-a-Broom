@@ -85,9 +85,11 @@ public class Player : MonoBehaviour
             anim.SetBool(groundVar, false);
         }
         
+        /*
         if (other.gameObject.CompareTag("Flag"))
         {
             GameManager.cleared = true;
         }
+        */
     }
 }
